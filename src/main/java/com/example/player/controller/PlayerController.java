@@ -2,12 +2,14 @@ package com.example.player.controller;
 
 import org.springframework.web.bind.annotation.*;
 import java.util.*;
+import org.springframework.beans.factory.annotation.Autowired;
 import com.example.player.model.Player;
 import com.example.player.service.PlayerH2Service;
 
 @RestController
 public class PlayerController {
-    PlayerH2Service apiservice = new PlayerH2Service();
+    @Autowired
+    public PlayerH2Service apiservice;
 
     @GetMapping("/players")
     public ArrayList<Player> getPlayer() {
@@ -27,8 +29,7 @@ public class PlayerController {
     }
 
     @PutMapping("players/{playerId}")
-
-    public Player updatPlayer(@PathVariable("playerId") int playerId, @RequestBody Player player) {
+    public Player updatePlayer(@PathVariable("playerId") int playerId, @RequestBody Player player) {
         return apiservice.updatePlayer(playerId, player);
     }
 
